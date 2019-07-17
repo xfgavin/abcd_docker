@@ -62,7 +62,7 @@ echo "*Installing FSL  5.0.2.2-centos6_64          *"
 echo "**********************************************"
 for ((i=0;i<=13;i++))
 do
-  aria2c -q -x 10 -s 10 -d /tmp/fsl -o fsl-5.0.2.2-centos6_64.tgz`padzero $i` https://github.com/xfgavin/abcd_docker/raw/master/packages/fsl-5.0.2.2-centos6_64.tgz`padzero $i`
+  aria2c -q -x 10 -s 10 -d /tmp/fsl -o fsl-5.0.2.2-centos6_64.tgz`padzero $i` https://github.com/xfgavin/abcd_docker_mmps/raw/master/packages/fsl-5.0.2.2-centos6_64.tgz`padzero $i`
 done
 cat /tmp/fsl/fsl-5.0.2.2-centos6_64.tgz* >/tmp/fsl/fsl-5.0.2.2-centos6_64.tgz
 tar xf /tmp/fsl/fsl-5.0.2.2-centos6_64.tgz -C /usr/pubsw/packages/fsl/
@@ -88,7 +88,7 @@ echo "*Installing AFNI 2010_10_19_1028             *"
 echo "**********************************************"
 for ((i=0;i<=3;i++))
 do
-  aria2c -q -x 10 -s 10 -d /tmp/afni -o AFNI_2010_10_19_1028.tgz0$i https://github.com/xfgavin/abcd_docker/raw/master/packages/AFNI_2010_10_19_1028.tgz0$i
+  aria2c -q -x 10 -s 10 -d /tmp/afni -o AFNI_2010_10_19_1028.tgz0$i https://github.com/xfgavin/abcd_docker_mmps/raw/master/packages/AFNI_2010_10_19_1028.tgz0$i
 done
 cat /tmp/afni/AFNI_2010_10_19_1028.tgz00 /tmp/afni/AFNI_2010_10_19_1028.tgz01 /tmp/afni/AFNI_2010_10_19_1028.tgz02 /tmp/afni/AFNI_2010_10_19_1028.tgz03 > /tmp/afni/AFNI_2010_10_19_1028.tgz
 tar xf /tmp/afni/AFNI_2010_10_19_1028.tgz -C /usr/pubsw/packages/afni/AFNI_2010_10_19_1028
@@ -99,7 +99,7 @@ echo "*Installing MMPS 251                         *"
 echo "**********************************************"
 for ((i=0;i<=28;i++))
 do
-  aria2c -q -x 10 -s 10 -d /tmp/mmps_perpheral_mmps -o mmps_perpheral_mmps.tgz.lrz`padzero $i` https://github.com/xfgavin/abcd_docker/raw/master/packages/mmps_perpheral/mmps_perpheral_mmps.tgz.lrz`padzero $i`
+  aria2c -q -x 10 -s 10 -d /tmp/mmps_perpheral_mmps -o mmps_perpheral_mmps.tgz.lrz`padzero $i` https://github.com/xfgavin/abcd_docker_mmps/raw/master/packages/mmps_perpheral/mmps_perpheral_mmps.tgz.lrz`padzero $i`
 done
 cat /tmp/mmps_perpheral_mmps/mmps_perpheral_mmps.tgz.lrz* > /tmp/mmps_perpheral_mmps/mmps_perpheral_mmps.tgz.lrz
 lrzip -d -q -O /tmp/mmps_perpheral_mmps/ /tmp/mmps_perpheral_mmps/mmps_perpheral_mmps.tgz.lrz
@@ -107,7 +107,7 @@ tar xf /tmp/mmps_perpheral_mmps/mmps_perpheral_mmps.tgz -C /usr/pubsw/packages
 
 for ((i=0;i<=10;i++))
 do
-  aria2c -q -x 10 -s 10 -d /tmp/mmps_engine -o mmps_engine.lrz`padzero $i` https://github.com/xfgavin/abcd_docker/raw/master/mmps_engine/mmps_engine.lrz`padzero $i`
+  aria2c -q -x 10 -s 10 -d /tmp/mmps_engine -o mmps_engine.lrz`padzero $i` https://github.com/xfgavin/abcd_docker_mmps/raw/master/mmps_engine/mmps_engine.lrz`padzero $i`
 done
 cat /tmp/mmps_engine/mmps_engine.lrz* > /tmp/mmps_engine/mmps_engine.lrz
 lrzip -d -q -O /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/bin/ /tmp/mmps_engine/mmps_engine.lrz
@@ -115,31 +115,31 @@ chmod +x /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/bin/mmps_engine
 
 for ((i=0;i<=1;i++))
 do
-  aria2c -q -x 10 -s 10 -d /tmp/mmps -o mmps_$MMPSVER.tgz`padzero $i` https://github.com/xfgavin/abcd_docker/raw/master/mmps/mmps_$MMPSVER.tgz`padzero $i`
+  aria2c -q -x 10 -s 10 -d /tmp/mmps -o mmps_$MMPSVER.tgz`padzero $i` https://github.com/xfgavin/abcd_docker_mmps/raw/master/mmps/mmps_$MMPSVER.tgz`padzero $i`
 done
 cat /tmp/mmps/mmps_$MMPSVER.tgz* > /tmp/mmps/mmps_$MMPSVER.tgz
 tar xf /tmp/mmps/mmps_$MMPSVER.tgz -C /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/
 
-aria2c -q -x 10 -s 10 -d /tmp -o mmps_perpheral_other.tgz https://github.com/xfgavin/abcd_docker/raw/master/packages/mmps_perpheral/mmps_perpheral_other.tgz
+aria2c -q -x 10 -s 10 -d /tmp -o mmps_perpheral_other.tgz https://github.com/xfgavin/abcd_docker_mmps/raw/master/packages/mmps_perpheral/mmps_perpheral_other.tgz
 tar xf /tmp/mmps_perpheral_other.tgz -C /usr/pubsw/packages/
 
-aria2c -q -x 1 -s 1 -d /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh -o abcd_init.sh https://raw.githubusercontent.com/xfgavin/abcd_docker/master/scripts/abcd_init.sh
-aria2c -q -x 1 -s 1 -d /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh -o mmps_fsurf.sh https://raw.githubusercontent.com/xfgavin/abcd_docker/master/scripts/mmps_fsurf.sh
+aria2c -q -x 1 -s 1 -d /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh -o abcd_init.sh https://raw.githubusercontent.com/xfgavin/abcd_docker_mmps/master/scripts/abcd_init.sh
+aria2c -q -x 1 -s 1 -d /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh -o mmps_fsurf.sh https://raw.githubusercontent.com/xfgavin/abcd_docker_mmps/master/scripts/mmps_fsurf.sh
 
 rm -f /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh/run_all_MMPS.sh
-aria2c -q -x 1 -s 1 -d /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh -o run_all_MMPS.sh https://raw.githubusercontent.com/xfgavin/abcd_docker/master/scripts/run_all_MMPS.sh
+aria2c -q -x 1 -s 1 -d /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh -o run_all_MMPS.sh https://raw.githubusercontent.com/xfgavin/abcd_docker_mmps/master/scripts/run_all_MMPS.sh
 rm -f /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh/getValue.sh
-aria2c -q -x 1 -s 1 -d /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh -o getValue.sh https://raw.githubusercontent.com/xfgavin/abcd_docker/master/scripts/getValue.sh
-aria2c -q -x 1 -s 1 -d /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh -o run_mmps_engine.sh https://raw.githubusercontent.com/xfgavin/abcd_docker/master/scripts/run_mmps_engine.sh
+aria2c -q -x 1 -s 1 -d /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh -o getValue.sh https://raw.githubusercontent.com/xfgavin/abcd_docker_mmps/master/scripts/getValue.sh
+aria2c -q -x 1 -s 1 -d /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh -o run_mmps_engine.sh https://raw.githubusercontent.com/xfgavin/abcd_docker_mmps/master/scripts/run_mmps_engine.sh
 chmod +x /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh/*.sh
 
 ln -s /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/bin/mmps_engine /usr/pubsw/packages/MMPS/MMPS_$MMPSVER/sh/
 
-aria2c -q -x 1 -s 1 -d /tmp -o mmps_setupscripts.tgz https://raw.githubusercontent.com/xfgavin/abcd_docker/master/mmps/mmps_setupscripts.tgz
+aria2c -q -x 1 -s 1 -d /tmp -o mmps_setupscripts.tgz https://raw.githubusercontent.com/xfgavin/abcd_docker_mmps/master/mmps/mmps_setupscripts.tgz
 tar xf /tmp/mmps_setupscripts.tgz -C /usr/pubsw
 chmod +x /usr/pubsw/bin/*
 
-aria2c -q -x 10 -s 10 -d /tmp/ -o dtitk-2.3.1-Linux-x86_64.tar.gz https://github.com/xfgavin/abcd_docker/raw/master/packages/dtitk-2.3.1-Linux-x86_64.tar.gz
+aria2c -q -x 10 -s 10 -d /tmp/ -o dtitk-2.3.1-Linux-x86_64.tar.gz https://github.com/xfgavin/abcd_docker_mmps/raw/master/packages/dtitk-2.3.1-Linux-x86_64.tar.gz
 tar xf /tmp/dtitk-2.3.1-Linux-x86_64.tar.gz -C /usr/pubsw/packages/dtitk
 
 date
