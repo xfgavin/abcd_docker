@@ -50,7 +50,9 @@ bval/bvecs from header in Philips/Seimens, from file for GE
    - run_mmps_docker.sh
 
 2. build docker image:
-  ```build -t abcd .```
+  ```
+  build -t abcd .
+  ```
   This may take at least half an hour depends on your network bandwidth.
 3. In a temporary location, unpack the mmps_home.tar.gz file that contains the necessary scripts and
 data that will be mounted to the docker container’s /home/MMPS directory:
