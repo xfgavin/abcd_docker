@@ -110,8 +110,8 @@ used by the fMRI data analysis
 This will run postprocessing steps based on:
 infix_list in /home/MMPS/bin/run_ABCD_post.sh
 and the proc step files for each step.
-For example, there are 13 postprocessing steps in run_ABCD_post.sh now, which are:
-6. analysis steps:
+For example, there are 15 postprocessing steps in run_ABCD_post.sh now, which are:
+analysis steps:
 ```
 analyze_sMRI
 analyze_dMRI
@@ -120,7 +120,7 @@ analyze_RSI
 analyze_rsBOLD
 analyze_taskBOLD
 ```
-7. summary steps:
+summary steps:
 ```
 summarize_DTI
 summarize_DTI_full
@@ -166,9 +166,13 @@ fsico → /home/MMPS/data/ABCD_NEW/fsico
 ```
 Please do not change values for other columns unless you know the meaning.
 After that, let’s create a ProjInfo folder for project ABCD_NEW using command below:
-```cp -a /path/to/mmps_home/ProjInfo/DAL_ABCD /path/to/mmps_home/ProjInfo/ABCD_NEW```
+```
+cp -a /path/to/mmps_home/ProjInfo/DAL_ABCD /path/to/mmps_home/ProjInfo/ABCD_NEW
+```
 Then rename those DAL_ABCD_* files to ABCD_NEW_*, for example:
-```mv /path/to/mmps_home/ProjInfo/ABCD_NEW/DAL_ABCD_Series_Classify.csv /path/to/mmps_home/ProjInfo/ABCD_NEW/ABCD_NEW_Series_Classify.csv```
+```
+mv /path/to/mmps_home/ProjInfo/ABCD_NEW/DAL_ABCD_Series_Classify.csv /path/to/mmps_home/ProjInfo/ABCD_NEW/ABCD_NEW_Series_Classify.csv
+```
 Next, you may change parameter inside those proc step files for your own need.
 Thus, we finished making project info record and proc step files. Now, let’s modify parameters in the
 run_mmps_docker.sh as below:
