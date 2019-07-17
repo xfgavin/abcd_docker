@@ -31,12 +31,12 @@ dcmtk, Ver: 3.6.0
 Some scripts from SPM5b
 ```
 ## Prerequisites
-   ● Host OS. This docker container has been tested under Centos 7.4.1708. It has not been tested under Microsoft Windows.
-   ● Memory and storage for docker
-    - ○ At least 6GB memory is required to run all processing steps, 12GB is recommended.
-    - ○ On Mac, 64GB disk image size is recommended (the uncompressed MMPS docker is
+   - Host OS. This docker container has been tested under Centos 7.4.1708. It has not been tested under Microsoft Windows.
+   - Memory and storage for docker
+     - At least 6GB memory is required to run all processing steps, 12GB is recommended.
+     - On Mac, 64GB disk image size is recommended (the uncompressed MMPS docker is
 approximately 22GB).
-- ● FreeSurfer license. A personal FreeSurfer license needs to be obtained from
+- FreeSurfer license. A personal FreeSurfer license needs to be obtained from
 https://surfer.nmr.mgh.harvard.edu/registration.html. Please note, version of FreeSurfer is 530.
 
 ## Recommendations
@@ -54,22 +54,22 @@ bval/bvecs from header in Philips/Seimens, from file for GE
   This may take at least half an hour depends on your network bandwidth.
 3. In a temporary location, unpack the mmps_home.tar.gz file that contains the necessary scripts and
 data that will be mounted to the docker container’s /home/MMPS directory:
-   - ● .cshrc: shell enviorment configuration file that defines the version of several necessary
+   - .cshrc: shell enviorment configuration file that defines the version of several necessary
 software packages.
-   - ● bin/: binary folder contains necessary scripts, which are explained in run_mmps_docker.sh
-   - ● ProjInfo/MMIL_ProjInfo.csv: This is the project setup configuration file. There is an example
+   - bin/: binary folder contains necessary scripts, which are explained in run_mmps_docker.sh
+   - ProjInfo/MMIL_ProjInfo.csv: This is the project setup configuration file. There is an example
 setup for project: DAL_ABCD. This file defines location of necessary processing
 directories and some necessary parameters.
-   - ● ProjInfo/$ProjID/${ProjID}_*_ProcSteps.csv: these are processing steps files that defines
+   - ProjInfo/$ProjID/${ProjID}_*_ProcSteps.csv: these are processing steps files that defines
 parameters needed for each processing step. Each step is explained in run_mmps_docker.sh
-   - ● ProjInfo/network_*: containers parcellation maps
+   - ProjInfo/network_*: containers parcellation maps
 4. To configure a project, modify the run_mmps_docker.sh script. Please input appropriate values for
 these following variables:
-   - ● ProjID: (your project id, example: DAL_ABCD)
-   - ● FSLic: (where you saved the obtained FreeSurfer license from step 1. example: `pwd`/.license
-   - ● HomeRoot: location that the mmps_home.tar.gz is extracted to from step 1, such as the host download directory. Example: /Users/dsmith/Download/mmps_home
-   - ● RawDataRoot: location where the fast-track tgz files are, this has to be a path inside the docker container. Example: /home/MMPS/data/fast-track
-   - ● You may also adjust the processing step configuration files as required.
+   - ProjID: (your project id, example: DAL_ABCD)
+   - FSLic: (where you saved the obtained FreeSurfer license from step 1. example: `pwd`/.license
+   - HomeRoot: location that the mmps_home.tar.gz is extracted to from step 1, such as the host download directory. Example: /Users/dsmith/Download/mmps_home
+   - RawDataRoot: location where the fast-track tgz files are, this has to be a path inside the docker container. Example: /home/MMPS/data/fast-track
+   - You may also adjust the processing step configuration files as required.
 
 ## Processing steps
 Please also check notes inside $HomeRoot/bin/run_preparedata.sh:
@@ -84,14 +84,14 @@ This step is optional but recommended
 In this step, DICOM data will first be converted into mgz format, then different correction processes will run for
 different modality (e.g. dMRI files will be corrected for motion/bias field/B0/Eddy current etc.)
 This will run preprocessing steps based on:
-infix_list in $HomeRoot//bin/run_ABCD_pre.sh
+infix_list in $HomeRoot/bin/run_ABCD_pre.sh
 and the proc step files for each preprocessing step.
 For example, there are four preprocessing steps in run_ABCD_pre.sh now, which are: pc, proc, fsurf, and
 proc_dMRI. Their associated proc step file are:
 ```
 /home/MMPS/ProjInfo/$ProjID/${ProjID}_pc_ProcSteps.csv
 /home/MMPS/ProjInfo/$ProjID/${ProjID}_proc_ProcSteps.csv
-/home/MMPS/ProjInfo/$ProjID/${ProjID}_fsurf_ProcSteps.csv
+/home/MMPS/ProjInfo/$ProjID/${ProjID}_freesurfer_ProcSteps.csv
 /home/MMPS/ProjInfo/$ProjID/${ProjID}_proc_dMRI_ProcSteps.csv
 ```
 Those proc step files contains necessary parameters for processing. You may change them for your own
@@ -109,13 +109,27 @@ This will run postprocessing steps based on:
 infix_list in /home/MMPS/bin/run_ABCD_post.sh
 and the proc step files for each step.
 For example, there are 13 postprocessing steps in run_ABCD_post.sh now, which are:
-5 analysis steps:
-analyze_sMRI analyze_dMRI analyze_rsBOLD analyze_RSI analyze_taskBOLD
-8 summary steps:
-summarize_DTI summarize_MRI summarize_MRI_info summarize_RSI
-summarize_rsBOLD_aparc_networks summarize_rsBOLD_aparc_subcort
+6. analysis steps:
+```
+analyze_sMRI
+analyze_dMRI
+analyze_DTI_full
+analyze_RSI
+analyze_rsBOLD
+analyze_taskBOLD
+```
+7. summary steps:
+```
+summarize_DTI
+summarize_DTI_full
+summarize_RSI
+summarize_MRI
+summarize_MRI_info
+summarize_rsBOLD_aparc_networks
+summarize_rsBOLD_aparc_subcort
 summarize_rsBOLD_aparc_var
 summarize_taskBOLD
+```
 They also have associated proc step file in /home/MMPS/ProjInfo/$ProjID/. Those proc step files contains
 necessary parameters for processing. You may change them for your own need but default is recommended.
 If succeeded, you may find summarized results in
@@ -150,18 +164,16 @@ fsico → /home/MMPS/data/ABCD_NEW/fsico
 ```
 Please do not change values for other columns unless you know the meaning.
 After that, let’s create a ProjInfo folder for project ABCD_NEW using command below:
-`cp -a /path/to/mmps_home/ProjInfo/DAL_ABCD
-/path/to/mmps_home/ProjInfo/ABCD_NEW`
+```cp -a /path/to/mmps_home/ProjInfo/DAL_ABCD /path/to/mmps_home/ProjInfo/ABCD_NEW```
 Then rename those DAL_ABCD_* files to ABCD_NEW_*, for example:
-`mv /path/to/mmps_home/ProjInfo/ABCD_NEW/DAL_ABCD_Series_Classify.csv
-/path/to/mmps_home/ProjInfo/ABCD_NEW/ABCD_NEW_Series_Classify.csv`
+```mv /path/to/mmps_home/ProjInfo/ABCD_NEW/DAL_ABCD_Series_Classify.csv /path/to/mmps_home/ProjInfo/ABCD_NEW/ABCD_NEW_Series_Classify.csv```
 Next, you may change parameter inside those proc step files for your own need.
 Thus, we finished making project info record and proc step files. Now, let’s modify parameters in the
 run_mmps_docker.sh as below:
-- ● ProjID=ABCD_NEW
-- ● FSLic=/path/to/freesurfer/.license
-- ● HomeRoot=/path/to/mmps_home
-- ● RawDataRoot=/home/MMPS/data/fast-track
+- ProjID=ABCD_NEW
+- FSLic=/path/to/freesurfer/.license
+- HomeRoot=/path/to/mmps_home
+- RawDataRoot=/home/MMPS/data/fast-track
 You may also change processing steps inside the run_mmps_docker.sh script for your own need. You may
 even make your own script and put it in /path/to/mmps_home/bin and change -c parameter of docker to
 execute it.
