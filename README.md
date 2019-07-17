@@ -111,6 +111,7 @@ This will run postprocessing steps based on:
 infix_list in /home/MMPS/bin/run_ABCD_post.sh
 and the proc step files for each step.
 For example, there are 15 postprocessing steps in run_ABCD_post.sh now, which are:
+
 analysis steps:
 ```
 analyze_sMRI
