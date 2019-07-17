@@ -1,4 +1,4 @@
-# ABCD docker file
+# ABCD docker
 ## Overview
 The Multi-Modal Processing Stream (MMPS) is a software package that consists of binaries, scripts, and
 matlab functions, designed collectively to process data from non-invasive brain imaging methods. These
