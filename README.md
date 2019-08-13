@@ -110,14 +110,14 @@ used by the fMRI data analysis
 This will run postprocessing steps based on:
 infix_list in /home/MMPS/bin/run_ABCD_post.sh
 and the proc step files for each step.
-For example, there are 15 postprocessing steps in run_ABCD_post.sh now, which are:
+For example, there are 16 postprocessing steps in run_ABCD_post.sh now, which are:
 
 analysis steps:
 ```
 analyze_sMRI
 analyze_dMRI
 analyze_DTI_full
-analyze_RSI
+analyze_behav
 analyze_rsBOLD
 analyze_taskBOLD
 ```
@@ -128,10 +128,11 @@ summarize_DTI_full
 summarize_RSI
 summarize_MRI
 summarize_MRI_info
-summarize_rsBOLD_aparc_networks
-summarize_rsBOLD_aparc_subcort
-summarize_rsBOLD_aparc_var
+summarize_rsBOLD_aparc2_networks
+summarize_rsBOLD_aparc2_subcort
+summarize_rsBOLD_aparc2_var
 summarize_taskBOLD
+summarize_behav
 ```
 They also have associated proc step file in /home/MMPS/ProjInfo/$ProjID/. Those proc step files contains
 necessary parameters for processing. You may change them for your own need but default is recommended.
