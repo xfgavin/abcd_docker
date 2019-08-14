@@ -47,7 +47,7 @@ bval/bvecs from header in Philips/Seimens, from file for GE
 1. download these three necessary files:
    - abcd dockerfile and script (Dockerfile and abcddocker_installer.sh)
    - mmps_home.tar.gz
-   - run_mmps_docker.sh
+   - run_abcd_docker.sh
 
 2. build docker image:
   ```
@@ -58,14 +58,14 @@ bval/bvecs from header in Philips/Seimens, from file for GE
 data that will be mounted to the docker container’s /home/MMPS directory:
    - .cshrc: shell enviorment configuration file that defines the version of several necessary
 software packages.
-   - bin/: binary folder contains necessary scripts, which are explained in run_mmps_docker.sh
+   - bin/: binary folder contains necessary scripts, which are explained in run_abcd_docker.sh
    - ProjInfo/MMIL_ProjInfo.csv: This is the project setup configuration file. There is an example
 setup for project: DAL_ABCD. This file defines location of necessary processing
 directories and some necessary parameters.
    - ProjInfo/$ProjID/${ProjID}_*_ProcSteps.csv: these are processing steps files that defines
-parameters needed for each processing step. Each step is explained in run_mmps_docker.sh
+parameters needed for each processing step. Each step is explained in run_abcd_docker.sh
    - ProjInfo/network_*: containers parcellation maps
-4. To configure a project, modify the run_mmps_docker.sh script. Please input appropriate values for
+4. To configure a project, modify the run_abcd_docker.sh script. Please input appropriate values for
 these following variables:
    - ProjID: (your project id, example: DAL_ABCD)
    - FSLic: (where you saved the obtained FreeSurfer license from step 1. example: `pwd`/.license
@@ -110,14 +110,14 @@ used by the fMRI data analysis
 This will run postprocessing steps based on:
 infix_list in /home/MMPS/bin/run_ABCD_post.sh
 and the proc step files for each step.
-For example, there are 15 postprocessing steps in run_ABCD_post.sh now, which are:
+For example, there are 16 postprocessing steps in run_ABCD_post.sh now, which are:
 
 analysis steps:
 ```
 analyze_sMRI
 analyze_dMRI
 analyze_DTI_full
-analyze_RSI
+analyze_behav
 analyze_rsBOLD
 analyze_taskBOLD
 ```
@@ -128,10 +128,11 @@ summarize_DTI_full
 summarize_RSI
 summarize_MRI
 summarize_MRI_info
-summarize_rsBOLD_aparc_networks
-summarize_rsBOLD_aparc_subcort
-summarize_rsBOLD_aparc_var
+summarize_rsBOLD_aparc2_networks
+summarize_rsBOLD_aparc2_subcort
+summarize_rsBOLD_aparc2_var
 summarize_taskBOLD
+summarize_behav
 ```
 They also have associated proc step file in /home/MMPS/ProjInfo/$ProjID/. Those proc step files contains
 necessary parameters for processing. You may change them for your own need but default is recommended.
@@ -176,14 +177,14 @@ mv /path/to/mmps_home/ProjInfo/ABCD_NEW/DAL_ABCD_Series_Classify.csv /path/to/mm
 ```
 Next, you may change parameter inside those proc step files for your own need.
 Thus, we finished making project info record and proc step files. Now, let’s modify parameters in the
-run_mmps_docker.sh as below:
+run_abcd_docker.sh as below:
 - ProjID=ABCD_NEW
 - FSLic=/path/to/freesurfer/.license
 - HomeRoot=/path/to/mmps_home
 - RawDataRoot=/home/MMPS/data/fast-track
-You may also change processing steps inside the run_mmps_docker.sh script for your own need. You may
+You may also change processing steps inside the run_abcd_docker.sh script for your own need. You may
 even make your own script and put it in /path/to/mmps_home/bin and change -c parameter of docker to
 execute it.
-Finally, let’s execute the run_mmps_docker.sh script and sit back. It may run for hours (or even longer)
+Finally, let’s execute the run_abcd_docker.sh script and sit back. It may run for hours (or even longer)
 depending on the processing steps you choose and the size of the dataset. Don’t forget to put on your power
 adapter if you are running on laptop.
